@@ -1,0 +1,14 @@
+<div>
+    <h3>Welcome to Landing Page</h3>
+</div>
+<div>
+    <h5>List of Users</h5>
+    <ng-container *ngFor="let user of users">
+        <div>
+            <i>{{user?.username}}</i>
+        </div>
+    </ng-container>
+</div>
+<div>
+    <h4>JWT token expire in 10 seconds</h4>
+</div>
