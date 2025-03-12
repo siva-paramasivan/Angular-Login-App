@@ -1,14 +1,41 @@
 <div>
-    <h3>Welcome to Landing Page</h3>
+    <button pButton pRipple label="Add customer" icon="pi pi-plus" (click)="addCustomerInfo()"></button>
+</div>
+
+<div *ngIf="customers">
+    <h5>List of customers</h5>
+    <table  >
+        <thead class="body-column-border">
+            <tr class="body-column-border">
+                <th class="body-column-border">Name</th>
+                <th class="body-column-border">Email Address</th>
+                <th class="body-column-border">Address</th>
+                <th class="body-column-border">Contact</th>
+                <th class="body-column-border" rowspan="10" colspan="12" [style.min-width.px]="60">Action Items</th>
+            </tr>
+        </thead>
+        <tbody class="body-column-border">
+            <ng-container *ngFor="let customer of customers;let i=index" >
+                <tr >
+                    <td class="body-column-border">{{customer?.name}}</td>
+                    <td class="body-column-border">{{customer?.emailAddress}}</td>
+                    <td class="body-column-border">{{customer?.address}}</td>
+                    <td class="body-column-border">{{customer?.contactInformation}}</td>
+                    <td class="body-column-border"><button pButton type="button" label="Edit" 
+                        (click)="enableCustomerPopup(i)" class="p-button-success"></button></td>
+                    <td class="body-column-border"><button pButton type="button" label="Delete" 
+                            (click)="deleteCustomer(i)" class="p-button-danger"></button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    
 </div>
 <div>
-    <h5>List of Users</h5>
-    <ng-container *ngFor="let user of users">
-        <div>
-            <i>{{user?.username}}</i>
-        </div>
-    </ng-container>
 </div>
-<div>
-    <h4>JWT token expire in 10 seconds</h4>
-</div>
+
+<p-dialog header="{{popupHeader}} Customer" [modal]="true" [(visible)]="isCutomerFormVisible" [style]="{ width: '30rem' }">
+    <app-customer-form *ngIf="isCutomerFormVisible" (emitCustomerForm)="onSubmitCustomer($event)" [isCustomerEdit]="isCustomerEdit"
+    [customerDetails]="customerDetails"
+    (cancelCustomerForm)="cancelCustomerForm()"></app-customer-form>
+</p-dialog>
