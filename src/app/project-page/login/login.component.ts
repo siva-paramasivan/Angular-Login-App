@@ -11,7 +11,7 @@ import { User } from '../../interfaces/user';
 })
 
 export class LoginComponent {
-
+  currentCustomer:string="customer"
   loginForm: FormGroup = new FormGroup({
     userName: new FormControl(''),
     password: new FormControl(''),

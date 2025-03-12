@@ -11,6 +11,10 @@ import { errorInterceptor } from '../helpers/interceptors/error.interceptor';
 import { appConfig } from '../app.config';
 import { RegisterComponent } from './register/register.component';
 import { jwtInterceptor } from '../helpers/interceptors/jwt.interceptor';
+import { DialogModule } from 'primeng/dialog';
+import { ComponentModule } from '../../app/component/component.module';
+import { ButtonModule } from 'primeng/button';
+
 
 @NgModule({
   declarations: [LoginComponent, LandingPageComponent, RegisterComponent],
@@ -20,10 +24,13 @@ import { jwtInterceptor } from '../helpers/interceptors/jwt.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DialogModule,
+    ButtonModule,
+    ComponentModule,
     ToastrModule.forRoot(),
   ],
   providers: [AuthService, provideHttpClient(withInterceptors([
     errorInterceptor,jwtInterceptor
-  ]))]
+  ]))],
 })
 export class ProjectPageModule { }
